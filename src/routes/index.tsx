@@ -37,8 +37,10 @@ function Index() {
   return (
     <div className="min-h-screen bg-[#0a1024] text-white antialiased">
       <Nav />
-      <Hero />
-      <Process />
+      <div className="bg-gradient-to-b from-[#16307a] via-[#0f1f54] to-[#0a1024]">
+        <Hero />
+        <Process />
+      </div>
       <Services />
       <HowItWorks />
       <ContactForm />
@@ -49,7 +51,7 @@ function Index() {
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/5 bg-[#0a1024]/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/5 bg-[#0d1a44]/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2">
           <img src={logoAsset.url} alt="InnovatorsLab" className="h-8 w-auto sm:h-9" />
@@ -75,7 +77,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#0e1a3d] via-[#0a1330] to-[#0a1024]">
+    <section className="relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 sm:py-28 md:py-32">
         <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/80 sm:text-xs">
           <span className="h-1.5 w-1.5 rounded-full bg-sky-300" />
@@ -128,7 +130,7 @@ const processSteps = [
 
 function Process() {
   return (
-    <section id="process" className="bg-[#0a1024] py-20 sm:py-24">
+    <section id="process" className="py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
           From idea to intellectual property
