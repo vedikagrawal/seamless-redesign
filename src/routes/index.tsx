@@ -316,6 +316,22 @@ function ContactForm() {
           Please fill in your details and requirements. We'll get back to you within 12 hours.
         </h2>
 
+        <ul className="mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
+          {[
+            "Free 30-minute call — no obligation",
+            "NDA available before detailed discussion",
+            "Clear next steps and timeline by the end of the call",
+          ].map((t) => (
+            <li
+              key={t}
+              className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700"
+            >
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-sky-600" />
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
+
         <form
           onSubmit={(e) => {
             e.preventDefault();
