@@ -37,8 +37,10 @@ function Index() {
   return (
     <div className="min-h-screen bg-[#0a1024] text-white antialiased">
       <Nav />
-      <Hero />
-      <Process />
+      <div className="bg-gradient-to-b from-[#16307a] via-[#0f1f54] to-[#0a1024]">
+        <Hero />
+        <Process />
+      </div>
       <Services />
       <HowItWorks />
       <ContactForm />
@@ -49,7 +51,7 @@ function Index() {
 
 function Nav() {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/5 bg-[#0a1024]/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/5 bg-[#0d1a44]/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2">
           <img src={logoAsset.url} alt="InnovatorsLab" className="h-8 w-auto sm:h-9" />
@@ -75,7 +77,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#0e1a3d] via-[#0a1330] to-[#0a1024]">
+    <section className="relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 sm:py-28 md:py-32">
         <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em] text-white/80 sm:text-xs">
           <span className="h-1.5 w-1.5 rounded-full bg-sky-300" />
@@ -128,7 +130,7 @@ const processSteps = [
 
 function Process() {
   return (
-    <section id="process" className="bg-[#0a1024] py-20 sm:py-24">
+    <section id="process" className="py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
           From idea to intellectual property
@@ -215,45 +217,23 @@ function HowItWorks() {
   return (
     <section id="how-it-works" className="bg-slate-50 py-20 text-slate-900 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-600">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-sky-600">
           How it works
         </p>
-        <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+        <h2 className="mt-3 text-center text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
           Two focused services. One simple promise.
         </h2>
-        <p className="mt-4 max-w-2xl text-slate-600">
+        <p className="mx-auto mt-4 max-w-2xl text-center text-slate-600">
           You explain your idea. We handle the rest — design, documentation, filing and tracking.
         </p>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {/* Design Registration */}
-          <div className="relative rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
-            <span className="absolute -top-3 right-6 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow">
-              Most Popular
-            </span>
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
             <span className="inline-flex rounded-full bg-sky-50 px-3 py-1 text-xs font-medium text-sky-700">
-              Service 01
+              Design Registration
             </span>
-            <h3 className="mt-4 text-2xl font-bold sm:text-3xl">Design Registration</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Protect the appearance, shape, pattern or visual design of your product.
-            </p>
-
-            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-              Perfect for
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {["Consumer Products", "Electronics", "Packaging", "Industrial Products", "Furniture", "Accessories"].map((t) => (
-                <span key={t} className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-700">
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-              How it works
-            </p>
-            <ol className="mt-3 space-y-3">
+            <ol className="mt-6 space-y-4">
               {howItWorksSteps.design.map((s, i) => (
                 <li key={s.title} className="flex items-start gap-3">
                   <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-sky-50 text-[11px] font-semibold text-sky-700">
@@ -269,56 +249,14 @@ function HowItWorks() {
                 </li>
               ))}
             </ol>
-
-            <div className="mt-7 rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Flat package
-              </p>
-              <div className="mt-1 flex items-baseline gap-2">
-                <span className="text-3xl font-bold tracking-tight">₹32,000</span>
-                <span className="text-xs text-slate-500">All-inclusive</span>
-              </div>
-              <ul className="mt-4 grid grid-cols-1 gap-y-2 text-sm text-slate-700 sm:grid-cols-2">
-                {["Consultation","NDA","CAD Design","Documentation","Filing Support","Status Tracking","Final Documentation"].map((f) => (
-                  <li key={f} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-sky-600" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="#contact"
-                className="mt-5 inline-flex w-full items-center justify-center rounded-md bg-gradient-to-r from-sky-500 to-blue-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:opacity-95"
-              >
-                Start Design Registration
-              </a>
-            </div>
           </div>
 
           {/* Copyright Registration */}
           <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
             <span className="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-              Service 02
+              Copyright Registration
             </span>
-            <h3 className="mt-4 text-2xl font-bold sm:text-3xl">Copyright Registration</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Protect your original creative work — written, visual or digital.
-            </p>
-
-            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-              Perfect for
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {["Books","Software","Educational Content","Training Material","Research Work","Artwork","Business Documents"].map((t) => (
-                <span key={t} className="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-700">
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-              How it works
-            </p>
-            <ol className="mt-3 space-y-3">
+            <ol className="mt-6 space-y-4">
               {howItWorksSteps.copyright.map((s, i) => (
                 <li key={s.title} className="flex items-start gap-3">
                   <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-sky-50 text-[11px] font-semibold text-sky-700">
@@ -334,29 +272,6 @@ function HowItWorks() {
                 </li>
               ))}
             </ol>
-
-            <div className="mt-7 rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Pricing
-              </p>
-              <div className="mt-1 flex items-baseline gap-2">
-                <span className="text-3xl font-bold tracking-tight">Custom</span>
-                <span className="text-xs text-slate-500">Based on scope of work</span>
-              </div>
-              <ul className="mt-4 grid grid-cols-1 gap-y-2 text-sm text-slate-700 sm:grid-cols-2">
-                {["Consultation","Documentation Preparation","Copyright Filing","Status Tracking","Updates Throughout"].map((f) => (
-                  <li key={f} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-sky-600" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="#contact"
-                className="mt-5 inline-flex w-full items-center justify-center rounded-md bg-gradient-to-r from-sky-500 to-blue-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:opacity-95"
-              >
-                Get Quote
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -400,6 +315,22 @@ function ContactForm() {
         <h2 className="mx-auto mt-3 max-w-2xl text-center text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
           Please fill in your details and requirements. We'll get back to you within 12 hours.
         </h2>
+
+        <ul className="mx-auto mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
+          {[
+            "Free 30-minute call — no obligation",
+            "NDA available before detailed discussion",
+            "Clear next steps and timeline by the end of the call",
+          ].map((t) => (
+            <li
+              key={t}
+              className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-700"
+            >
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-sky-600" />
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
 
         <form
           onSubmit={(e) => {
