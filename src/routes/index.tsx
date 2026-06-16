@@ -37,10 +37,8 @@ function Index() {
   return (
     <div className="min-h-screen bg-[#0a1024] text-white antialiased">
       <Nav />
-      <div className="bg-gradient-to-b from-[#16307a] via-[#0f1f54] to-[#0a1024]">
-        <Hero />
-        <Process />
-      </div>
+      <Hero />
+      <Process />
       <Services />
       <HowItWorks />
       <ContactForm />
