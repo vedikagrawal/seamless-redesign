@@ -295,9 +295,54 @@ const SERVICE_OPTIONS = [
   "Patent Filing",
 ];
 
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxPizUe0doLi-tPLa7hD7bcS0MYkI3BFdIQvTRXOvlNH_cMkVsG_-eeyW5KrhYP6b83AA/exec";
+
 function ContactForm() {
-  const [industry, setIndustry] = useState("");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    industry: "",
+    service: "",
+    otherIndustry: "",
+    description: "",
+  });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          industry: formData.industry === "Other (Please Specify)"
+            ? `Other: ${formData.otherIndustry}`
+            : formData.industry,
+          service: formData.service,
+          description: formData.description,
+        }),
+      });
+      setSubmitted(true);
+    } catch (err) {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const inputCls =
     "mt-1.5 w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200";
@@ -331,32 +376,56 @@ function ContactForm() {
         </ul>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSubmitted(true);
-          }}
+          onSubmit={handleSubmit}
           className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
         >
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
               <label className={labelCls}>Full Name {req}</label>
-              <input required maxLength={100} className={inputCls} placeholder="Jane Doe" />
+              <input
+                name="fullName"
+                required
+                maxLength={100}
+                value={formData.fullName}
+                onChange={handleChange}
+                className={inputCls}
+                placeholder="Jane Doe"
+              />
             </div>
             <div>
               <label className={labelCls}>Phone Number {req}</label>
-              <input required type="tel" maxLength={20} className={inputCls} placeholder="+91 98765 43210" />
+              <input
+                name="phone"
+                required
+                type="tel"
+                maxLength={20}
+                value={formData.phone}
+                onChange={handleChange}
+                className={inputCls}
+                placeholder="+91 98765 43210"
+              />
             </div>
             <div className="sm:col-span-2">
               <label className={labelCls}>Email Address {req}</label>
-              <input required type="email" maxLength={255} className={inputCls} placeholder="you@email.com" />
+              <input
+                name="email"
+                required
+                type="email"
+                maxLength={255}
+                value={formData.email}
+                onChange={handleChange}
+                className={inputCls}
+                placeholder="you@email.com"
+              />
             </div>
 
             <div>
               <label className={labelCls}>Industry / Sector {req}</label>
               <select
+                name="industry"
                 required
-                value={industry}
-                onChange={(e) => setIndustry(e.target.value)}
+                value={formData.industry}
+                onChange={handleChange}
                 className={inputCls}
               >
                 <option value="" disabled>Select an industry</option>
@@ -367,7 +436,13 @@ function ContactForm() {
             </div>
             <div>
               <label className={labelCls}>Service Required {req}</label>
-              <select required defaultValue="" className={inputCls}>
+              <select
+                name="service"
+                required
+                value={formData.service}
+                onChange={handleChange}
+                className={inputCls}
+              >
                 <option value="" disabled>Select a service</option>
                 {SERVICE_OPTIONS.map((o) => (
                   <option key={o} value={o}>{o}</option>
@@ -375,18 +450,29 @@ function ContactForm() {
               </select>
             </div>
 
-            {industry === "Other (Please Specify)" && (
+            {formData.industry === "Other (Please Specify)" && (
               <div className="sm:col-span-2">
                 <label className={labelCls}>Please Specify {req}</label>
-                <input required maxLength={100} className={inputCls} placeholder="Your industry" />
+                <input
+                  name="otherIndustry"
+                  required
+                  maxLength={100}
+                  value={formData.otherIndustry}
+                  onChange={handleChange}
+                  className={inputCls}
+                  placeholder="Your industry"
+                />
               </div>
             )}
 
             <div className="sm:col-span-2">
               <label className={labelCls}>Brief Description</label>
               <textarea
+                name="description"
                 rows={4}
                 maxLength={1000}
+                value={formData.description}
+                onChange={handleChange}
                 className={inputCls}
                 placeholder="Tell us about your idea or project..."
               />
@@ -395,9 +481,10 @@ function ContactForm() {
 
           <button
             type="submit"
-            className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-gradient-to-r from-sky-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow transition hover:opacity-95"
+            disabled={loading}
+            className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-gradient-to-r from-sky-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow transition hover:opacity-95 disabled:opacity-60"
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </button>
 
           <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-xs text-slate-500">
